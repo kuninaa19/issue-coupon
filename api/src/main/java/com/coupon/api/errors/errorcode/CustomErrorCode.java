@@ -11,6 +11,8 @@ public enum CustomErrorCode implements ErrorCode {
 
     INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "Invalid parameter included"),
     RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND, "Cannot find resource."),
+    ALREADY_EXIST_RESOURCE(HttpStatus.BAD_REQUEST,"Already Exist Resource"),
+
     ;
 
     private final HttpStatus httpStatus;
