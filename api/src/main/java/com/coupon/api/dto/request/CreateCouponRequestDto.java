@@ -1,7 +1,11 @@
 package com.coupon.api.dto.request;
 
-public class CouponCreateRequestDto {
+import org.springframework.lang.NonNull;
+
+public class CreateCouponRequestDto {
+    @NonNull
     private String name;
+    @NonNull
     private Long quantity;
 
     public String getName() {

@@ -2,7 +2,7 @@ package com.coupon.api.dto.request;
 
 import com.sun.istack.NotNull;
 
-public class UserCreateRequestDto {
+public class CreateUserRequestDto {
     @NotNull
     private String email;
 

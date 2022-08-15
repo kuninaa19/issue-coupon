@@ -2,20 +2,17 @@ package com.coupon.api.dto.response;
 
 import com.coupon.common.model.User;
 
-public class UserCreateResponseDto {
-    /**
-     * TODO final 변수를 써도 되나?
-     * */
+public class CreateUserResponseDto {
     private final Long id;
     private final String email;
 
-    public UserCreateResponseDto(Long id, String email) {
+    public CreateUserResponseDto(Long id, String email) {
         this.id = id;
         this.email = email;
     }
 
-    public static UserCreateResponseDto of(User user) {
-        return new UserCreateResponseDto(user.getId(), user.getEmail());
+    public static CreateUserResponseDto of(User user) {
+        return new CreateUserResponseDto(user.getId(), user.getEmail());
     }
 
     public Long getId() {
