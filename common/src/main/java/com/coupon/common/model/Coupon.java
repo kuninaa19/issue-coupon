@@ -16,22 +16,29 @@ public class Coupon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "coupon_name", nullable = false, unique = true)
+    @Column(name = "COUPON_NAME", nullable = false, unique = true)
     private String name;
 
     private Long quantity;
 
     @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "CREATED_AT", nullable = false, updatable = false)
     private Date createdAt;
 
-    public Coupon(String name, Long quantity) {
-        this.name = name;
-        this.quantity = quantity;
+    public static Coupon createCoupon(String name, Long quantity) {
+        Coupon aCoupon = new Coupon();
+        aCoupon.name = name;
+        aCoupon.quantity = quantity;
+
+        return aCoupon;
     }
 
-    public Coupon() {
+    public Boolean existCouponQuantity() {
+        return this.getQuantity() > 0;
+    }
 
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -45,6 +52,4 @@ public class Coupon {
     public Date getCreatedAt() {
         return createdAt;
     }
-
-
 }

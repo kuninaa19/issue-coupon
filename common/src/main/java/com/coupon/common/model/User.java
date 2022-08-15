@@ -16,14 +16,13 @@ public class User {
     private String email;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<UserCoupon> coupons = new ArrayList<UserCoupon>();
+    private List<UserCoupon> coupons = new ArrayList<>();
 
-    public User(String email) {
-        this.email = email;
-    }
+    public static User createUser(String email) {
+        User anUser = new User();
+        anUser.email = email;
 
-    public User() {
-
+        return anUser;
     }
 
     public Long getId() {
