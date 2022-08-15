@@ -8,6 +8,11 @@ public class CreateCouponRequestDto {
     @NonNull
     private int quantity;
 
+    public CreateCouponRequestDto(String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
+
     public String getName() {
         return name;
     }
