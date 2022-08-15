@@ -18,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,26 +64,23 @@ public class CouponService {
         return CreateCouponResponseDto.of(aCoupon);
     }
 
-    @Transactional
+    @Transactional(timeout = 2, rollbackFor = IOException.class)
     public IssueCouponResponseDto userIssueCoupon(Long coupon_id, IssueCouponRequestDto issueCouponRequestDto) {
-        User anUser = userRepository.findByEmail(issueCouponRequestDto.getEmail());
+        User anUser = userRepository.findByEmailWithLocking(issueCouponRequestDto.getEmail());
         if (anUser == null) {
             throw new RestApiException(CustomErrorCode.RESOURCE_NOT_FOUND);
         }
-
-        Coupon aCoupon = couponRepository.findById(coupon_id).orElse(null);
-        if (aCoupon == null) {
-            throw new RestApiException(CustomErrorCode.RESOURCE_NOT_FOUND);
-        }
-        if (!aCoupon.existCouponQuantity()) {
-            throw new RestApiException(CustomErrorCode.RESOURCE_NOT_FOUND);
-        }
-
-        if (userCouponRepository.exist(anUser.getId(), aCoupon.getId())) {
+        if (userCouponRepository.exist(anUser.getId(), coupon_id)) {
             throw new RestApiException(CustomErrorCode.ALREADY_EXIST_RESOURCE);
         }
 
+        Coupon aCoupon = couponRepository.existCouponQuantity(coupon_id);
+        if (aCoupon == null) {
+            throw new RestApiException(CustomErrorCode.RESOURCE_NOT_FOUND);
+        }
+
         UserCoupon issuedCoupon = userCouponRepository.save(createUserCoupon(aCoupon, anUser));
+        aCoupon.removeQuantity();
 
         return IssueCouponResponseDto.of(issuedCoupon);
     }
