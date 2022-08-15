@@ -1,5 +1,6 @@
 package com.coupon.common.model;
 
+import org.hibernate.PropertyNotFoundException;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -19,13 +20,13 @@ public class Coupon {
     @Column(name = "COUPON_NAME", nullable = false, unique = true)
     private String name;
 
-    private Long quantity;
+    private int quantity;
 
     @CreatedDate
     @Column(name = "CREATED_AT", nullable = false, updatable = false)
     private Date createdAt;
 
-    public static Coupon createCoupon(String name, Long quantity) {
+    public static Coupon createCoupon(String name, int quantity) {
         Coupon aCoupon = new Coupon();
         aCoupon.name = name;
         aCoupon.quantity = quantity;
@@ -33,8 +34,12 @@ public class Coupon {
         return aCoupon;
     }
 
-    public Boolean existCouponQuantity() {
-        return this.getQuantity() > 0;
+    public void removeQuantity() {
+        int restQuantity = this.quantity - 1;
+        if (restQuantity < 0) {
+            throw new PropertyNotFoundException("Have not enough quantity");
+        }
+        this.quantity = restQuantity;
     }
 
     public Long getId() {
@@ -45,7 +50,7 @@ public class Coupon {
         return name;
     }
 
-    public Long getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
