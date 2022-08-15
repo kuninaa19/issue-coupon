@@ -7,10 +7,10 @@ import java.util.Date;
 public class CreateCouponResponseDto {
     private final Long id;
     private final String name;
-    private final Long quantity;
+    private final int quantity;
     private final Date createdAt;
 
-    public CreateCouponResponseDto(Long id, String name, Long quantity, Date createdAt) {
+    public CreateCouponResponseDto(Long id, String name, int quantity, Date createdAt) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
@@ -29,7 +29,7 @@ public class CreateCouponResponseDto {
         return name;
     }
 
-    public Long getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 

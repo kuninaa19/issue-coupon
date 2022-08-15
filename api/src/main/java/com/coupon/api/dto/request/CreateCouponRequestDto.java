@@ -6,13 +6,13 @@ public class CreateCouponRequestDto {
     @NonNull
     private String name;
     @NonNull
-    private Long quantity;
+    private int quantity;
 
     public String getName() {
         return name;
     }
 
-    public Long getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 }

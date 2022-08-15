@@ -6,10 +6,10 @@ import java.util.Date;
 
 public class FindCouponResponseDto {
     private final String name;
-    private final Long quantity;
+    private final int quantity;
     private final Date createdAt;
 
-    public FindCouponResponseDto(String name, Long quantity, Date createdAt) {
+    public FindCouponResponseDto(String name, int quantity, Date createdAt) {
         this.name = name;
         this.quantity = quantity;
         this.createdAt = createdAt;
@@ -23,7 +23,7 @@ public class FindCouponResponseDto {
         return name;
     }
 
-    public Long getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
