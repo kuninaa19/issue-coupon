@@ -10,7 +10,7 @@ import java.util.List;
 @Table(indexes = @Index(columnList = "email"))
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     private String email;

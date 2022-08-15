@@ -22,7 +22,7 @@ import static com.coupon.common.model.User.createUser;
 public class UserService {
     private final UserRepository userRepository;
 
-    public FindUserResponseDto getUser(String email){
+    public FindUserResponseDto getUser(String email) {
         User anResult = userRepository.findByEmail(email);
         if (anResult == null) {
             throw new RestApiException(CustomErrorCode.RESOURCE_NOT_FOUND);
