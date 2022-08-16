@@ -4,5 +4,5 @@ import com.coupon.common.model.Coupon;
 
 public interface CustomCouponRepository {
 
-    Coupon existCouponQuantity(Long id);
+    Coupon existRestQuantity(Long id);
 }

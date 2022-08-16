@@ -42,7 +42,6 @@ public class CouponService {
         return coupons.stream().map(FindCouponResponseDto::of).collect(Collectors.toList());
     }
 
-
     public FindCouponResponseDto findCoupon(Long couponId) {
         Coupon aCoupon = couponRepository.findById(couponId).orElse(null);
         if (aCoupon == null) {
@@ -74,13 +73,13 @@ public class CouponService {
             throw new RestApiException(CustomErrorCode.ALREADY_EXIST_RESOURCE);
         }
 
-        Coupon aCoupon = couponRepository.existCouponQuantity(coupon_id);
+        Coupon aCoupon = couponRepository.existRestQuantity(coupon_id);
         if (aCoupon == null) {
             throw new RestApiException(CustomErrorCode.RESOURCE_NOT_FOUND);
         }
 
         UserCoupon issuedCoupon = userCouponRepository.save(createUserCoupon(aCoupon, anUser));
-        aCoupon.removeQuantity();
+        aCoupon.removeRestQuantity();
 
         return IssueCouponResponseDto.of(issuedCoupon);
     }

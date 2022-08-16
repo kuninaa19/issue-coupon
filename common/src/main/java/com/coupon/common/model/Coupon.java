@@ -21,6 +21,8 @@ public class Coupon {
     private String name;
 
     private int quantity;
+    @Column(name = "REST_QUANTITY", nullable = false)
+    private int restQuantity;
 
     @CreatedDate
     @Column(name = "CREATED_AT", nullable = false, updatable = false)
@@ -30,16 +32,17 @@ public class Coupon {
         Coupon aCoupon = new Coupon();
         aCoupon.name = name;
         aCoupon.quantity = quantity;
+        aCoupon.restQuantity = quantity;
 
         return aCoupon;
     }
 
-    public void removeQuantity() {
-        int restQuantity = this.quantity - 1;
+    public void removeRestQuantity() {
+        int restQuantity = this.restQuantity - 1;
         if (restQuantity < 0) {
             throw new PropertyNotFoundException("Have not enough quantity");
         }
-        this.quantity = restQuantity;
+        this.restQuantity = restQuantity;
     }
 
     public Long getId() {

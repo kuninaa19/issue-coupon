@@ -16,9 +16,9 @@ public class CustomCouponRepositoryImpl extends QuerydslRepositorySupport implem
     }
 
     @Override
-    public Coupon existCouponQuantity(Long id) {
+    public Coupon existRestQuantity(Long id) {
         return jpaQueryFactory.selectFrom(coupon)
-                .where(coupon.id.eq(id).and(coupon.quantity.gt(0)))
+                .where(coupon.id.eq(id).and(coupon.restQuantity.gt(0)))
                 .setLockMode(PESSIMISTIC_WRITE)
                 .fetchOne();
     }
