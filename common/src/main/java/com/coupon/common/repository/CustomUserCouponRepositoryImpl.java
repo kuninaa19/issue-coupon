@@ -29,7 +29,14 @@ public class CustomUserCouponRepositoryImpl extends QuerydslRepositorySupport im
     }
 
     @Override
-    public List<UserCoupon> findIssuedCouponByCouponId(Long couponId){
+    public List<UserCoupon> findUserCouponByEmail(String email) {
+        return jpaQueryFactory.selectFrom(userCoupon).join(userCoupon.coupon, coupon).fetchJoin().join(userCoupon.user, user)
+                .where(userCoupon.user.email.eq(email))
+                .fetch();
+    }
+
+    @Override
+    public List<UserCoupon> findIssuedCouponByCouponId(Long couponId) {
         return jpaQueryFactory
                 .selectFrom(userCoupon)
                 .join(userCoupon.coupon, coupon)
