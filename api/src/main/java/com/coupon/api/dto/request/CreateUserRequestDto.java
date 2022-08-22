@@ -1,10 +1,14 @@
 package com.coupon.api.dto.request;
 
-import com.sun.istack.NotNull;
+import org.springframework.lang.NonNull;
 
 public class CreateUserRequestDto {
-    @NotNull
+    @NonNull
     private String email;
+
+    public CreateUserRequestDto(String email) {
+        this.email = email;
+    }
 
     public String getEmail() {
         return email;
