@@ -1,5 +1,8 @@
 package com.coupon.api.dto.request;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class IssueCouponRequestDto {
     private String email;
 
