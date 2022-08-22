@@ -32,6 +32,7 @@ public class CustomUserCouponRepositoryImpl extends QuerydslRepositorySupport im
     public List<UserCoupon> findUserCouponByEmail(String email) {
         return jpaQueryFactory.selectFrom(userCoupon).join(userCoupon.coupon, coupon).fetchJoin().join(userCoupon.user, user)
                 .where(userCoupon.user.email.eq(email))
+                .orderBy(userCoupon.createdAt.asc())
                 .fetch();
     }
 
