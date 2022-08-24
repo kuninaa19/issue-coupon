@@ -63,9 +63,9 @@ public class CouponService {
         return CreateCouponResponseDto.of(aCoupon);
     }
 
-    @Transactional(timeout = 2, rollbackFor = IOException.class)
+    @Transactional(timeout = 3, rollbackFor = InterruptedException.class)
     public IssueCouponResponseDto userIssueCoupon(Long coupon_id, IssueCouponRequestDto issueCouponRequestDto) {
-        User anUser = userRepository.findByEmailWithLocking(issueCouponRequestDto.getEmail());
+        User anUser = userRepository.findByEmail(issueCouponRequestDto.getEmail());
         if (anUser == null) {
             throw new RestApiException(CustomErrorCode.RESOURCE_NOT_FOUND);
         }
