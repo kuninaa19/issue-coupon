@@ -10,10 +10,10 @@
 조건 : 500Thread, Ramp-up periods: 1, 쿠폰 수량: 180개
 
 - Aggregate Report
-![Aggregate Report](img.png) 
+![Aggregate Report](images/mysql-x-lock-aggregate-report.png) 
 
 - TPS 수치  
-<img src="../../../Desktop/쿠폰 발급 요청 TPS.png" width="400" height="200"/>
+<img src="images/mysql-x-lock-tps-graph.png" width="400" height="200"/>
 
 --- 아쉬운 점 ---  
 데이터베이스가 Innodb엔진이라 수량 수정하는 부분에 대해서 row락이 걸리지만 단일 수정하는 사항이 단일 row이기때문에 사실상 테이블락과 다를게 없다고 생각한다.  
