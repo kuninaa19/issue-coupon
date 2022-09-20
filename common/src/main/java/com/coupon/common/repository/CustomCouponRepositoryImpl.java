@@ -4,8 +4,9 @@ import com.coupon.common.model.Coupon;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
+import javax.persistence.LockModeType;
+
 import static com.coupon.common.model.QCoupon.coupon;
-import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
 
 public class CustomCouponRepositoryImpl extends QuerydslRepositorySupport implements CustomCouponRepository {
     private final JPAQueryFactory jpaQueryFactory;
@@ -19,7 +20,7 @@ public class CustomCouponRepositoryImpl extends QuerydslRepositorySupport implem
     public Coupon existRestQuantity(Long id) {
         return jpaQueryFactory.selectFrom(coupon)
                 .where(coupon.id.eq(id).and(coupon.restQuantity.gt(0)))
-                .setLockMode(PESSIMISTIC_WRITE)
+                .setLockMode(LockModeType.OPTIMISTIC)
                 .fetchOne();
     }
 }

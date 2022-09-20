@@ -28,6 +28,10 @@ public class Coupon {
     @Column(name = "CREATED_AT", nullable = false, updatable = false)
     private Date createdAt;
 
+    @Version
+    private Integer version;
+
+
     public static Coupon createCoupon(String name, int quantity) {
         Coupon aCoupon = new Coupon();
         aCoupon.name = name;
